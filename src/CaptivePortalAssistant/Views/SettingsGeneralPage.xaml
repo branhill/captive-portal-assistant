@@ -1,0 +1,125 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:views="using:CaptivePortalAssistant.Views"
+      xmlns:helpers="using:CaptivePortalAssistant.Helpers"
+      x:Class="CaptivePortalAssistant.Views.SettingsGeneralPage"
+      mc:Ignorable="d"
+      SizeChanged="Page_SizeChanged"
+      d:DataContext="{d:DesignInstance views:SettingsGeneralPage}">
+
+    <Page.Resources>
+        <helpers:DetectionMethodToBoolConverter x:Key="DetectionMethodToBoolConverter" />
+        <helpers:AutomationOptionToBoolConverter x:Key="AutomationOptionToBoolConverter" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal"
+                    Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+            <TextBlock Text="General"
+                       Style="{StaticResource SubtitleTextBlockStyle}"
+                       VerticalAlignment="Center"
+                       Margin="16,0,0,0" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="16,0,16,16"
+                        MaxWidth="540"
+                        HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin"
+                                Value="0,4" />
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin"
+                                Value="0,4,0,0" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <TextBlock Text="Options"
+                           Style="{ThemeResource SettingsTitleTextBlockStyle}" />
+                <StackPanel>
+                    <TextBlock Text="Detection method" />
+                    <TextBlock Text="Android detection method is faster in most cases. If it doesn't work, choose Windows detection method."
+                               Style="{ThemeResource SettingsDescriptionTextBlockStyle}" />
+                    <RadioButton Content="Android"
+                                 GroupName="DetectionMethod"
+                                 IsChecked="{Binding SettingsStorageService.DetectionMethod, ConverterParameter=Android, Converter={StaticResource DetectionMethodToBoolConverter}, Mode=TwoWay}" />
+                    <RadioButton Content="Windows"
+                                 GroupName="DetectionMethod"
+                                 IsChecked="{Binding SettingsStorageService.DetectionMethod, ConverterParameter=Windows, Converter={StaticResource DetectionMethodToBoolConverter}, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Default automation option" />
+                    <RadioButton Content="Auto fill and login"
+                                 GroupName="DefaultAutomationOption"
+                                 IsChecked="{Binding SettingsStorageService.DefaultAutomationOption, ConverterParameter=Autologin, Converter={StaticResource AutomationOptionToBoolConverter}, Mode=TwoWay}" />
+                    <RadioButton Content="Auto fill only"
+                                 GroupName="DefaultAutomationOption"
+                                 IsChecked="{Binding SettingsStorageService.DefaultAutomationOption, ConverterParameter=Autofill, Converter={StaticResource AutomationOptionToBoolConverter}, Mode=TwoWay}" />
+                    <RadioButton Content="None"
+                                 GroupName="DefaultAutomationOption"
+                                 IsChecked="{Binding SettingsStorageService.DefaultAutomationOption, ConverterParameter=None, Converter={StaticResource AutomationOptionToBoolConverter}, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin"
+                                    Value="0,4" />
+                            <Setter Property="Width"
+                                    Value="128" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="Association"
+                               Style="{ThemeResource SettingsTitleTextBlockStyle}" />
+                    <TextBlock Style="{ThemeResource SettingsDescriptionTextBlockStyle}" >
+                        <Run Text="Let Windows auto open this app when you connect to a Wi-Fi hotspot that using captive portal, make sure:"/>
+                        <LineBreak /><Run Text="1. Turn on this app in &quot;Apps for websites&quot; settings."/>
+                        <LineBreak /><Run Text="2. Make this app as default association." />
+                    </TextBlock>
+                    <Button Content="Open Settings"
+                            Click="OpenSettingsButton_Click"/>
+                    <Button Content="Test association"
+                            Click="TestButton_Click" />
+                </StackPanel>
+
+                <TextBlock Text="Import &amp; export profiles"
+                           Style="{ThemeResource SettingsTitleTextBlockStyle}" />
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin"
+                                    Value="0,4" />
+                            <Setter Property="Width"
+                                    Value="128" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="Import profiles"
+                            Click="ImportButton_Click" />
+                    <Button Content="Export profiles"
+                            Click="ExportButton_Click" />
+                </StackPanel>
+
+                <TextBlock Text="About"
+                           Style="{ThemeResource SettingsTitleTextBlockStyle}" />
+                <StackPanel>
+                    <TextBlock Text="{x:Bind AppDescription}" />
+                    <TextBlock Text="© 2018 Brandon Hill. All rights reserved." />
+                    <HyperlinkButton Content="Help &amp; Feedback"
+                                     NavigateUri="https://branhill.com/"
+                                     Margin="0,4,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,80 @@
+﻿<ContentDialog x:Class="CaptivePortalAssistant.Views.SaveFormContentDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:local="using:CaptivePortalAssistant.Views"
+               xmlns:models="using:CaptivePortalAssistant.Models"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               mc:Ignorable="d"
+               Title="Save form"
+               PrimaryButtonText="Save"
+               CloseButtonText="Cancel"
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               Opened="ContentDialog_Opened">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock>
+            <Run Text="SSID: " />
+            <Run Text="{x:Bind Ssid}" />
+            </TextBlock>
+            <ListView Margin="0,4,0,0"
+                      ItemsSource="{x:Bind Fields, Mode=OneWay}"
+                      SelectionMode="None">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                        <Setter Property="Padding"
+                                Value="0" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ProfileField">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment"
+                                            Value="Center" />
+                                    <Setter Property="Margin"
+                                            Value="0,0,8,0" />
+                                </Style>
+                            </Grid.Resources>
+
+                            <TextBlock Text="{x:Bind Name}"
+                                       Margin="0,8" />
+                            <TextBox Text="{x:Bind Value, Mode=TwoWay}"
+                                     PlaceholderText="Value"
+                                     Grid.Row="1"
+                                     Margin="0" />
+                            <AppBarButton Label="Delete"
+                                          Icon="Delete"
+                                          Grid.Column="1"
+                                          Grid.RowSpan="2"
+                                          Width="48"
+                                          Height="48"
+                                          Margin="8,0,0,0"
+                                          VerticalAlignment="Bottom"
+                                          LabelPosition="Collapsed"
+                                          Click="DeleteButton_Click" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock x:Name="ReplaceWarningTextBlock"
+                       Text="There is already a profile with the same name exists. Continue to save will replace it."
+                       Visibility="Collapsed"
+                       TextWrapping="Wrap"
+                       Margin="0,16,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>
