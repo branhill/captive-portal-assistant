@@ -12,9 +12,8 @@ Unfortunately, website ownership validation required for the associated domain, 
 
 ## Prerequisites
 
-Windows 10 Creators Update (Build 15063) or higher
-
-Visual Studio 2017 with Universal Windows Platform development workload and Windows 10 SDK 16299
+* Windows 10 Creators Update (Build 15063) or higher
+* Visual Studio 2019 with Universal Windows Platform development workload and Windows 10 SDK 18362
 
 ## Installing
 
