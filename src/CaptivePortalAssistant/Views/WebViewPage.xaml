@@ -9,16 +9,16 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="48" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
             <Grid.Resources>
-                <Style TargetType="AppBarButton">
-                    <Setter Property="Width"
-                            Value="48" />
-                    <Setter Property="Height"
-                            Value="48" />
+                <Style TargetType="CommandBar">
+                    <Setter Property="DefaultLabelPosition"
+                            Value="Collapsed" />
+                    <Setter Property="Background"
+                            Value="{x:Null}" />
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -26,20 +26,23 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
-                <AppBarButton Icon="Back"
+            <CommandBar>
+                <AppBarButton Width="40"
+                              Icon="Back"
                               ToolTipService.ToolTip="Fill"
                               Click="BackButton_Click"
                               IsEnabled="{Binding CanGoBack, ElementName=MainWebView, Mode=OneWay}" />
-                <AppBarButton Icon="Forward"
+                <AppBarButton Width="40"
+                              Icon="Forward"
                               ToolTipService.ToolTip="Fill"
                               Click="ForwardButton_Click"
                               IsEnabled="{Binding CanGoForward, ElementName=MainWebView, Mode=OneWay}" />
                 <AppBarButton x:Name="RefreshStopButton"
+                              Width="40"
                               Icon="Refresh"
                               ToolTipService.ToolTip="Refresh or stop"
                               Click="RefreshStopButton_Click" />
-            </StackPanel>
+            </CommandBar>
             <TextBox x:Name="AddressTextbox"
                      Grid.Column="1"
                      Margin="8,0"
@@ -49,9 +52,9 @@
                      KeyDown="AddressTextbox_KeyDown"
                      GotFocus="AddressTextbox_GotFocus"
                      LostFocus="AddressTextbox_LostFocus" />
-            <StackPanel Orientation="Horizontal"
-                        Grid.Column="2">
+            <CommandBar Grid.Column="2">
                 <AppBarButton x:Name="FillButton"
+                              Width="40"
                               ToolTipService.ToolTip="Auto fill"
                               Click="FillButton_Click"
                               LabelPosition="Collapsed">
@@ -60,24 +63,24 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton x:Name="LoginButton"
+                              Width="40"
                               ToolTipService.ToolTip="Auto fill and login"
-                              Click="LoginButton_Click"
-                              LabelPosition="Collapsed">
+                              Click="LoginButton_Click">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE8D7;" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton x:Name="SaveButton"
+                              Width="40"
                               Icon="Save"
                               ToolTipService.ToolTip="Save form"
-                              Click="SaveButton_Click"
-                              LabelPosition="Collapsed" />
+                              Click="SaveButton_Click" />
                 <AppBarButton x:Name="SettingsButton"
+                              Width="40"
                               Icon="Setting"
                               ToolTipService.ToolTip="Settings"
-                              Click="SettingsButton_Click"
-                              LabelPosition="Collapsed" />
-            </StackPanel>
+                              Click="SettingsButton_Click" />
+            </CommandBar>
         </Grid>
         <ProgressBar x:Name="LoadingProgressBar"
                      Grid.Row="1"
