@@ -26,6 +26,8 @@
                         element.value = field.value;
                         break;
                     case 'checkbox':
+                        element.checked = true;
+                        break;
                     case 'radio':
                         element = document.querySelector(
                             'input[type=radio][name=' + field.name + '][value=' + field.value + ']');
